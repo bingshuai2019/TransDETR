@@ -26,7 +26,7 @@ import trans_detr.datasets.transforms as T
 from trans_detr.models.structures import Instances
 import os
 from trans_detr.datasets.data_tools import get_vocabulary
-import mmcv
+from util.mmcv_compat import list_from_file
 import math
 from PIL import Image, ImageDraw, ImageFont
 from util.box_ops import box_cxcywh_to_xyxy
@@ -202,7 +202,7 @@ class DetMOTDetection:
 #                 labels0 = np.loadtxt(label_path, dtype=np.float32).reshape(-1, 7)
                 labels0 = []
                 words = []
-                lines = mmcv.list_from_file(label_path)
+                lines = list_from_file(label_path)
                 
                 bboxes = []
                 texts = []

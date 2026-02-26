@@ -26,7 +26,7 @@ import datasets.transforms as T
 from models.structures import Instances
 import os
 from datasets.data_tools import get_vocabulary
-import mmcv
+from util.mmcv_compat import list_from_file
 import math
 from PIL import Image, ImageDraw, ImageFont
 from util.box_ops import box_cxcywh_to_xyxy
@@ -223,7 +223,7 @@ class DetMOTDetection:
             else:
                 labels0 = []
                 words = []
-                lines = mmcv.list_from_file(label_path)
+                lines = list_from_file(label_path)
                 
                 bboxes = []
                 texts = []

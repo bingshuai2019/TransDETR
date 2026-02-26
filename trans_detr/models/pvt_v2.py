@@ -8,7 +8,7 @@ from timm.models.registry import register_model
 from timm.models.vision_transformer import _cfg
 
 from mmdet.utils import get_root_logger
-from mmcv.runner import load_checkpoint
+from util.mmcv_compat import load_checkpoint
 import math
 
 pvt_small = 'https://github.com/whai362/PVT/releases/download/v2/'

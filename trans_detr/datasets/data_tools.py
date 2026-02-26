@@ -11,7 +11,7 @@
 import numpy as np
 import cv2
 import string
-import mmcv
+from util.mmcv_compat import list_from_file
 import random
 import math
 # import scipy.io as scio
@@ -41,7 +41,7 @@ def check(s):
 
 def get_ann_ic15(img, gt_path):
     # h, w = img.shape[0:2]
-    lines = mmcv.list_from_file(gt_path)
+    lines = list_from_file(gt_path)
     bboxes = []
     words = []
     for line in lines:
@@ -63,7 +63,7 @@ def get_ann_ic15(img, gt_path):
 
 def get_ann_ic15_video(img, gt_path):
     # h, w = img.shape[0:2]
-    lines = mmcv.list_from_file(gt_path)
+    lines = list_from_file(gt_path)
     bboxes = []
     words = []
     track_id = []
@@ -88,7 +88,7 @@ def get_ann_ic15_video(img, gt_path):
 
 def get_ann_kwai_det(img, gt_path):
     # h, w = img.shape[0:2]
-    lines = mmcv.list_from_file(gt_path)
+    lines = list_from_file(gt_path)
     bboxes = []
     words = []
     for line in lines:
@@ -104,7 +104,7 @@ def get_ann_kwai_det(img, gt_path):
 
 def get_ann_mtwi(img, gt_path):
     # h, w = img.shape[0:2]
-    lines = mmcv.list_from_file(gt_path)
+    lines = list_from_file(gt_path)
     bboxes = []
     words = []
     for line in lines:
