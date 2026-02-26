@@ -1,9 +1,9 @@
 make.sh
 setup.py
 test.py
-/mmu-ocr/weijiawu/Code/VideoSpotting/TransDETRe2e/models/ops/src/vision.cpp
-/mmu-ocr/weijiawu/Code/VideoSpotting/TransDETRe2e/models/ops/src/cpu/ms_deform_attn_cpu.cpp
-/mmu-ocr/weijiawu/Code/VideoSpotting/TransDETRe2e/models/ops/src/cuda/ms_deform_attn_cuda.cu
+/workplace/code/TransDETR/trans_detr/models/ops/src/vision.cpp
+/workplace/code/TransDETR/trans_detr/models/ops/src/cpu/ms_deform_attn_cpu.cpp
+/workplace/code/TransDETR/trans_detr/models/ops/src/cuda/ms_deform_attn_cuda.cu
 MultiScaleDeformableAttention.egg-info/PKG-INFO
 MultiScaleDeformableAttention.egg-info/SOURCES.txt
 MultiScaleDeformableAttention.egg-info/dependency_links.txt

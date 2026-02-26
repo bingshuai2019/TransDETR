@@ -8,7 +8,7 @@ from torch import nn, Tensor
 
 from typing import List
 
-from models.structures import Instances
+from trans_detr.models.structures import Instances
 
 
 class MemoryBank(nn.Module):

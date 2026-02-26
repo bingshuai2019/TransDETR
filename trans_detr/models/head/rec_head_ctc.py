@@ -5,7 +5,7 @@ import torch.nn.functional as F
 # from ..loss import acc
 import numpy as np
 # import Le
-from datasets.data_tools import get_vocabulary
+from trans_detr.datasets.data_tools import get_vocabulary
 
 class PAN_PP_RecHead_CTC(nn.Module):
 

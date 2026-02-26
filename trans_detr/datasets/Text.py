@@ -22,10 +22,10 @@ import torch.utils.data
 import os.path as osp
 from PIL import Image, ImageDraw
 import copy
-import datasets.transforms as T
-from models.structures import Instances
+import trans_detr.datasets.transforms as T
+from trans_detr.models.structures import Instances
 import os
-from datasets.data_tools import get_vocabulary
+from trans_detr.datasets.data_tools import get_vocabulary
 import mmcv
 import math
 from PIL import Image, ImageDraw, ImageFont

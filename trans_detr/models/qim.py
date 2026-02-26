@@ -11,9 +11,9 @@ from torch import nn, Tensor
 from torch.nn import functional as F
 from typing import Optional, List
 
-from util import box_ops
-from util.misc import inverse_sigmoid
-from models.structures import Boxes, Instances, pairwise_iou
+from trans_detr.util import box_ops
+from trans_detr.util.misc import inverse_sigmoid
+from trans_detr.models.structures import Boxes, Instances, pairwise_iou
 
 
 def random_drop_tracks(track_instances: Instances, drop_probability: float) -> Instances:

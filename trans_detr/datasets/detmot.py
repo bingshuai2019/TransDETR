@@ -19,8 +19,8 @@ import torch.utils.data
 import os.path as osp
 from PIL import Image, ImageDraw
 import copy
-import datasets.transforms as T
-from models.structures import Instances
+import trans_detr.datasets.transforms as T
+from trans_detr.models.structures import Instances
 
 
 class DetMOTDetection:

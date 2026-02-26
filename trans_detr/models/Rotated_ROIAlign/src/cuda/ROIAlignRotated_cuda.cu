@@ -2,7 +2,7 @@
 #include <ATen/ATen.h>
 #include <ATen/cuda/CUDAContext.h>
 
-#include <THC/THC.h>
+//#include <THC/THC.h>
 #include <THC/THCAtomics.cuh>
 #include <THC/THCDeviceUtils.cuh>
 
@@ -286,8 +286,8 @@ at::Tensor ROIAlignRotated_forward_cuda(const at::Tensor& input,
                                  const int pooled_height,
                                  const int pooled_width,
                                  const int sampling_ratio) {
-  AT_ASSERTM(input.type().is_cuda(), "input must be a CUDA tensor");
-  AT_ASSERTM(rois.type().is_cuda(), "rois must be a CUDA tensor");
+  AT_ASSERTM(input.is_cuda(), "input must be a CUDA tensor");
+  AT_ASSERTM(rois.is_cuda(), "rois must be a CUDA tensor");
 
   auto num_rois = rois.size(0);
   auto channels = input.size(1);
@@ -298,15 +298,15 @@ at::Tensor ROIAlignRotated_forward_cuda(const at::Tensor& input,
   auto output_size = num_rois * pooled_height * pooled_width * channels;
   cudaStream_t stream = at::cuda::getCurrentCUDAStream();
 
-  dim3 grid(std::min(THCCeilDiv((long)output_size, 512L), 4096L));
+  dim3 grid(std::min((((long)output_size + 512L - 1) / 512L), 4096L));
   dim3 block(512);
 
   if (output.numel() == 0) {
-    THCudaCheck(cudaGetLastError());
+    AT_CUDA_CHECK(cudaGetLastError());
     return output;
   }
 
-  AT_DISPATCH_FLOATING_TYPES(input.type(), "ROIAlignRotated_forward", [&] {
+  AT_DISPATCH_FLOATING_TYPES(input.scalar_type(), "ROIAlignRotated_forward", [&] {
     RoIAlignRotatedForward<scalar_t><<<grid, block, 0, stream>>>(
          output_size,
          input.contiguous().data<scalar_t>(),
@@ -320,7 +320,7 @@ at::Tensor ROIAlignRotated_forward_cuda(const at::Tensor& input,
          rois.contiguous().data<scalar_t>(),
          output.data<scalar_t>());
   });
-  THCudaCheck(cudaGetLastError());
+  AT_CUDA_CHECK(cudaGetLastError());
   return output;
 }
 
@@ -335,24 +335,24 @@ at::Tensor ROIAlignRotated_backward_cuda(const at::Tensor& grad,
                                   const int height,
                                   const int width,
                                   const int sampling_ratio) {
-  AT_ASSERTM(grad.type().is_cuda(), "grad must be a CUDA tensor");
-  AT_ASSERTM(rois.type().is_cuda(), "rois must be a CUDA tensor");
+  AT_ASSERTM(grad.is_cuda(), "grad must be a CUDA tensor");
+  AT_ASSERTM(rois.is_cuda(), "rois must be a CUDA tensor");
 
   auto num_rois = rois.size(0);
   auto grad_input = at::zeros({batch_size, channels, height, width}, grad.options());
 
   cudaStream_t stream = at::cuda::getCurrentCUDAStream();
 
-  dim3 grid(std::min(THCCeilDiv((long)grad.numel(), 512L), 4096L));
+  dim3 grid(std::min((((long)grad.numel() + 512L - 1) / 512L), 4096L));
   dim3 block(512);
 
   // handle possibly empty gradients
   if (grad.numel() == 0) {
-    THCudaCheck(cudaGetLastError());
+    AT_CUDA_CHECK(cudaGetLastError());
     return grad_input;
   }
 
-  AT_DISPATCH_FLOATING_TYPES(grad.type(), "ROIAlignRotated_backward", [&] {
+  AT_DISPATCH_FLOATING_TYPES(grad.scalar_type(), "ROIAlignRotated_backward", [&] {
     RoIAlignRotatedBackwardFeature<scalar_t><<<grid, block, 0, stream>>>(
          grad.numel(),
          grad.contiguous().data<scalar_t>(),
@@ -367,6 +367,6 @@ at::Tensor ROIAlignRotated_backward_cuda(const at::Tensor& grad,
          grad_input.data<scalar_t>(),
          rois.contiguous().data<scalar_t>());
   });
-  THCudaCheck(cudaGetLastError());
+  AT_CUDA_CHECK(cudaGetLastError());
   return grad_input;
 }
