@@ -19,12 +19,12 @@ import torch.nn.functional as F
 from torch import nn, Tensor
 from typing import List
 import math
-from util import box_ops
-from util.misc import (NestedTensor, nested_tensor_from_tensor_list,
+from trans_detr.util import box_ops
+from trans_detr.util.misc import (NestedTensor, nested_tensor_from_tensor_list,
                        accuracy, get_world_size, interpolate, get_rank,
                        is_dist_avail_and_initialized, inverse_sigmoid)
 
-from models.structures import Instances, Boxes, pairwise_iou, matched_boxlist_iou, matched_boxlist_rotated_iou
+from trans_detr.models.structures import Instances, Boxes, pairwise_iou, matched_boxlist_iou, matched_boxlist_rotated_iou
 from .structures.conv_bn_relu import Conv_BN_ReLU
 from .Rotated_ROIAlign.roi_align_rotate import ROIAlignRotated
 from .backbone import build_backbone
@@ -35,7 +35,7 @@ from .memory_bank import build_memory_bank
 from .deformable_detr import SetCriterion, MLP
 from .segmentation import sigmoid_focal_loss
 from .head.rec_head_ctc import PAN_PP_RecHead_CTC
-from datasets.data_tools import get_vocabulary
+from trans_detr.datasets.data_tools import get_vocabulary
 import time 
 
 class ClipMatcher(SetCriterion):

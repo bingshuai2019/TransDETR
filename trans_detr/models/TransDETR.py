@@ -35,7 +35,7 @@ from .memory_bank import build_memory_bank
 from .deformable_detr import SetCriterion, MLP
 from .segmentation import sigmoid_focal_loss
 from .head.rec_head_ctc import PAN_PP_RecHead_CTC
-from datasets.data_tools import get_vocabulary
+from trans_detr.datasets.data_tools import get_vocabulary
 import time 
 
 class ClipMatcher(SetCriterion):

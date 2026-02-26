@@ -22,14 +22,14 @@ import torch.utils.data
 import os.path as osp
 from PIL import Image, ImageDraw
 import copy
-import datasets.transforms as T
-from models.structures import Instances
+import trans_detr.datasets.transforms as T
+from trans_detr.models.structures import Instances
 import os
-from datasets.data_tools import get_vocabulary
-from util.mmcv_compat import list_from_file
+from trans_detr.datasets.data_tools import get_vocabulary
+from trans_detr.util.mmcv_compat import list_from_file
 import math
 from PIL import Image, ImageDraw, ImageFont
-from util.box_ops import box_cxcywh_to_xyxy
+from trans_detr.util.box_ops import box_cxcywh_to_xyxy
 from random import choice
 
 def cv2AddChineseText(image, text, position, textColor=(0, 0, 0), textSize=30):

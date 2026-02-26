@@ -11,7 +11,7 @@
 import numpy as np
 import cv2
 import string
-from util.mmcv_compat import list_from_file
+from trans_detr.util.mmcv_compat import list_from_file
 import random
 import math
 # import scipy.io as scio
